@@ -54,10 +54,10 @@
 @media(max-width:1023px) { .site-width { width:calc(100% - 48px); } .hero h1 { font-size:52px; } .hero-copy { width:60%; } }
 @media(max-width:639px) {
  .site-width { width:calc(100% - 40px); } .section-space { padding-block:58px; }
- .hero { min-height:700px; align-items:flex-end; }
- .hero-image { height:400px; object-position:72% center; }
- .hero::after { background:linear-gradient(0deg,var(--background) 0%,var(--background) 31%,oklch(.975 .007 310 / .8) 45%,transparent 63%); }
- .hero-copy { width:100%; padding:330px 0 38px; } .hero h1 { font-size:43px; line-height:1.08; } .hero-copy p { font-size:14px; }
+ .hero { min-height:640px; align-items:flex-end; }
+ .hero-image { height:330px; object-position:72% center; mask-image:linear-gradient(to bottom,var(--foreground) 58%,transparent 100%); }
+ .hero::after { background:none; }
+ .hero-copy { width:100%; padding:270px 0 32px; } .hero h1 { font-size:43px; line-height:1.08; } .hero-copy p { font-size:14px; }
  .heading { font-size:36px; } .hero-copy .eyebrow { margin-bottom:14px; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }

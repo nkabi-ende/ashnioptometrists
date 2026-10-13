@@ -5,7 +5,7 @@ import { WhatsAppCTA } from './enquiry';
 import { practice } from '@/lib/practice';
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
-export function SectionHeading({ eyebrow, title, description, children, className }: {eyebrow:string;title:string;description?:string;children?:ReactNode;className?:string}) {
+export function SectionHeading({ eyebrow, title, description, children, className }: {eyebrow:string;title:string;description?:string | undefined;children?:ReactNode;className?:string}) {
  return <div className={cn('mb-9 flex flex-wrap items-end justify-between gap-5',className)}><div><p className="eyebrow mb-3">{eyebrow}</p><h2 className="heading">{title}</h2>{description&&<p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">{description}</p>}</div>{children}</div>;
 }
 export const services = [
