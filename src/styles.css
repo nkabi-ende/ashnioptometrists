@@ -55,9 +55,10 @@
 @media(max-width:639px) {
  .site-width { width:calc(100% - 40px); } .section-space { padding-block:58px; }
  .hero { min-height:640px; align-items:flex-end; }
- .hero-image { height:330px; object-position:72% center; mask-image:linear-gradient(to bottom,var(--foreground) 58%,transparent 100%); }
+ .hero-image { height:300px; object-position:72% center; mask-image:linear-gradient(to bottom,var(--foreground) 58%,transparent 100%); }
  .hero::after { background:none; }
- .hero-copy { width:100%; padding:270px 0 32px; } .hero h1 { font-size:43px; line-height:1.08; } .hero-copy p { font-size:14px; }
+ .hero-copy { width:100%; padding:240px 0 32px; } .hero h1 { font-size:38px; line-height:1.08; } .hero-copy p { font-size:14px; }
  .heading { font-size:36px; } .hero-copy .eyebrow { margin-bottom:14px; }
 }
+@media(max-width:380px) { header .site-width { gap:8px; } header .site-width > a svg { width:30px; } header .site-width > a .font-display { font-size:28px; } header .site-width > a .uppercase { font-size:6px; letter-spacing:1.5px; } header .site-width > a > span { gap:6px; } header .site-width > div { gap:2px; } header .site-width > div > button:first-child { padding-inline:9px; font-size:10px; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }

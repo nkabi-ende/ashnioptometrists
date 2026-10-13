@@ -1,5 +1,5 @@
 # Ashni website draft
-- [ ] Build unified brand, navigation and six pages.
-- [ ] Add sample catalogue, filters and product previews.
-- [ ] Add enquiry previews, contact placeholders and directions.
-- [ ] Verify content rules, navigation and phone/desktop layouts.
+- [x] Build unified brand, navigation and six pages.
+- [x] Add sample catalogue, filters and product previews.
+- [x] Add enquiry previews, contact placeholders and directions.
+- [x] Verify content rules, navigation and phone/desktop layouts.
