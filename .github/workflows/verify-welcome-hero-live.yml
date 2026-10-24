@@ -1,0 +1,30 @@
+name: Verify Ashni welcoming homepage hero live
+on:
+  push:
+    branches: [diagnostics/verify-welcome-hero-live-20261024]
+jobs:
+  live-hero:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Confirm Cloudflare serves restored homepage hero
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://ashnioptometrists.com/?hero-check=20261024"
+          ready=0
+          for attempt in $(seq 1 14); do
+            status=$(curl -L --silent --show-error --connect-timeout 8 --max-time 18 -o /tmp/ashni-home -w '%{http_code}' "$url&attempt=$attempt" || true)
+            if [ "$status" = "200" ] && grep -q 'Thoughtful Eye Care.' /tmp/ashni-home && grep -q 'Welcome to eye care that puts you first' /tmp/ashni-home && grep -q 'Eyewear That Fits' /tmp/ashni-home; then
+              echo "PASS: New patient-focused headline and description are live in production"
+              ready=1
+              break
+            fi
+            echo "Check $attempt/14: status=$status, updated hero not detected"
+            sleep 8
+          done
+          test "$ready" = "1"
+          grep -q 'Explore Eyewear' /tmp/ashni-home
+          grep -q 'R90' /tmp/ashni-home
+          grep -q 'og-ashni-dr-v2.png' /tmp/ashni-home
+          echo "PASS: Existing shop CTA, R90 banner and Dr Ashni social metadata preserved"
