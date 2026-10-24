@@ -1,0 +1,10 @@
+import { Link } from '@tanstack/react-router';
+import { ArrowRight, GraduationCap, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { practice } from '@/lib/practice';
+import { WhatsAppCTA } from './enquiry';
+
+export function Practitioner({ full = false }: { full?: boolean }) {
+ const person = practice.optometrist;
+ return <section className="section-space border-y bg-card"><div className="site-width grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:gap-16"><div className="min-w-0"><p className="eyebrow mb-4">Your optometrist in Rossburgh</p><h2 className="heading">Meet {person.name}.</h2><p className="mt-5 text-sm leading-7 text-muted-foreground">{person.name} holds a {person.qualification} from the University of KwaZulu-Natal (UKZN) and has been practising optometry for {person.yearsPractising} years.</p><p className="mt-4 text-sm leading-7 text-muted-foreground">At Ashni Optometrists, eye care and individual style come together. Visit our Rossburgh practice for an eye examination, explore spectacle frames, or discuss lens options that suit your prescription and everyday needs.</p>{full ? <WhatsAppCTA className="mt-6 h-11">Enquire about an appointment</WhatsAppCTA> : <Button asChild variant="link" className="mt-5 px-0 text-xs"><Link to="/about">More about Ashni<ArrowRight/></Link></Button>}</div><div className="min-w-0 self-center border-l-2 border-primary/20 pl-6"><p className="font-display text-5xl font-semibold text-primary">{person.yearsPractising}<span className="ml-2 text-xl font-medium">years</span></p><p className="mt-2 text-xs text-muted-foreground">of optometry practice</p><div className="mt-7 flex items-start gap-3"><GraduationCap className="mt-1 size-5 shrink-0 text-primary"/><div><p className="text-sm font-semibold">{person.qualification}</p><p className="mt-1 text-xs leading-6 text-muted-foreground">University of KwaZulu-Natal</p></div></div><p className="mt-5 flex items-center gap-3 text-xs text-muted-foreground"><Heart className="size-5 shrink-0 text-primary"/>Personal care. Local experience.</p></div></div></section>;
+}

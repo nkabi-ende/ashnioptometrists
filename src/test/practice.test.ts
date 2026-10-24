@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { practice, enquiryMessages, whatsappUrl } from '@/lib/practice';
 import { products } from '@/lib/catalogue';
 describe('Official contact and demo safeguards',()=>{
+ it('uses the supplied optometry qualification and university',()=>{ expect(practice.optometrist.qualification).toBe('B Optom (Cum Laude)'); expect(practice.optometrist.universityShort).toBe('UKZN'); });
+ it('uses the supplied practising experience',()=>{ expect(practice.optometrist.yearsPractising).toBe(21); });
  it('directs enquiries to the official WhatsApp number',()=>{ expect(whatsappUrl(enquiryMessages.appointment)).toBe('https://wa.me/27735326811?text='+encodeURIComponent(enquiryMessages.appointment)); });
   it('still refuses missing contact numbers',()=>{ expect(whatsappUrl('Hello','')).toBeNull(); });
   it('uses Monday–Friday opening times',()=>{ expect(practice.hours.weekdays.opens).toBe('05:00'); expect(practice.hours.weekdays.closes).toBe('15:00'); });

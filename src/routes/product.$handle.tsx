@@ -8,9 +8,10 @@ export const Route = createFileRoute('/product/$handle')({
   loader: ({ context }) => context.queryClient.ensureQueryData(catalogueOptions),
   head: ({ params, loaderData }) => {
     const product = loaderData?.products.find(p => p.handle === params.handle);
-    const image = product?.featuredImage?.url;
-    const head = pageHead(`${product?.title || 'Eyewear'} | Ashni Optometrists`, product?.description || 'Enquire about eyewear and in-practice fitting at Ashni Optometrists in Durban.');
-    return { ...head, meta: [...head.meta, ...(image?.startsWith('https://') ? [{ property: 'og:image', content: image }, { name: 'twitter:image', content: image }] : [])] };
+    const originalImage = product?.featuredImage?.url;
+    const image = originalImage ? `${originalImage}${originalImage.includes('?') ? '&' : '?'}width=1200&height=630&crop=center` : undefined;
+    const head = pageHead(`${product?.title || 'Eyewear'} | Ashni Optometrists`, product?.description || 'Enquire about eyewear and in-practice fitting at Ashni Optometrists in Durban.', `/product/${encodeURIComponent(params.handle)}`);
+    return { ...head, meta: [...head.meta, ...(!product ? [{ name: 'robots', content: 'noindex, follow' }] : []), ...(image?.startsWith('https://') ? [{ property: 'og:image', content: image }, { name: 'twitter:image', content: image }] : [])] };
   },
   component: Product,
 });
