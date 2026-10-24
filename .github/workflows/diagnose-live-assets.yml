@@ -21,6 +21,12 @@ jobs:
           find .output/public -maxdepth 3 -type f | grep -E '(logo|favicon|og-ashni)' || true
           echo "-- OUTPUT DIRECTORIES --"
           ls -la .output/public .output/server || true
+          echo "-- GENERATED CLOUDFLARE CONFIG --"
+          cat .output/server/wrangler.json
+          echo "-- NITRO DEPLOY CONFIG --"
+          cat .wrangler/deploy/config.json || true
+          echo "-- GIT HEAD --"
+          git rev-parse HEAD
       - name: Probe live domain and assets
         run: |
           for path in / /ashni-logo-approved.svg /ashni-logo-mark.svg /favicon.svg /favicon.png /og-ashni.png /robots.txt /sitemap.xml; do
