@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { siteUrl, absoluteUrl, pageHead, practiceSchema, siteSchema, breadcrumbSchema } from '@/lib/seo';
+import { siteUrl, socialImageUrl, logoUrl, absoluteUrl, pageHead, practiceSchema, siteSchema, breadcrumbSchema } from '@/lib/seo';
 import { practice } from '@/lib/practice';
 
 describe('Production SEO and local business metadata', () => {
@@ -12,6 +12,16 @@ describe('Production SEO and local business metadata', () => {
   expect(head.links).toContainEqual({rel: 'canonical', href: 'https://ashnioptometrists.com/eye-care'});
   expect(head.meta).toContainEqual({property: 'og:url', content: 'https://ashnioptometrists.com/eye-care'});
   expect(head.meta).toContainEqual({name: 'robots', content: 'index, follow, max-image-preview:large'});
+ });
+ it('exposes one branded high-resolution social sharing image for the official domain', () => {
+  const head = pageHead('Rossburgh optometrist', 'Eyecare in Durban.', '/eye-care');
+  expect(socialImageUrl).toBe('https://ashnioptometrists.com/og-ashni.png');
+  expect(head.meta).toContainEqual({property: 'og:image', content: socialImageUrl});
+  expect(head.meta).toContainEqual({property: 'og:image:width', content: '1200'});
+  expect(head.meta).toContainEqual({property: 'og:image:height', content: '630'});
+  expect(head.meta).toContainEqual({name: 'twitter:image', content: socialImageUrl});
+  expect(head.meta).toContainEqual({name: 'twitter:card', content: 'summary_large_image'});
+  expect(practiceSchema.logo).toBe(logoUrl);
  });
  it('uses the official full practice name and consistent address', () => {
   expect(practice.name).toBe('Ashni Penchaliah Optometrists');

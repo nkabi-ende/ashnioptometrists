@@ -1,0 +1,14 @@
+{
+  "name": "Ashni Penchaliah Optometrists",
+  "short_name": "Ashni Optometrists",
+  "description": "Eye examinations, eyewear and R90 driving licence eye tests in Rossburgh, Durban.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#351247",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
