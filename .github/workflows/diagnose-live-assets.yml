@@ -18,9 +18,9 @@ jobs:
           ls -lh public/*logo* public/favicon* public/og-ashni* || true
           bun run build
           echo "-- OUTPUT ASSETS --"
-          find dist -type f \\( -iname '*logo*' -o -iname '*favicon*' -o -iname '*og-ashni*' \\) -print || true
+          find .output/public -maxdepth 3 -type f | grep -E '(logo|favicon|og-ashni)' || true
           echo "-- OUTPUT DIRECTORIES --"
-          ls -la dist || true
+          ls -la .output/public .output/server || true
       - name: Probe live domain and assets
         run: |
           for path in / /ashni-logo-approved.svg /ashni-logo-mark.svg /favicon.svg /favicon.png /og-ashni.png /robots.txt /sitemap.xml; do
