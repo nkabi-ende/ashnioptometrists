@@ -2,9 +2,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { WhatsAppCTA } from './enquiry';
 import { practice } from '@/lib/practice';
 const answers = [
- { question: 'How much is a driving licence eye test?', answer: `The driving licence eye test costs R${practice.licenceOffer.price}. Visit Ashni Optometrists at 51 Titren Road, Rossburgh, opposite the licensing centre. WhatsApp the practice to confirm the test arrangements and what to bring.` },
+ { question: 'How much is a driving licence eye test?', answer: `The driving licence eye test costs R${practice.licenceOffer.price}. Visit Ashni Penchaliah Optometrists at 51 Titren Road, Rossburgh, opposite the licensing centre. WhatsApp the practice to confirm the test arrangements and what to bring.` },
  { question: 'What time do you open?', answer: 'Monday to Friday: 5:00 AM–3:00 PM. Saturday: 6:00 AM–11:00 AM. Please contact the practice to confirm Sunday or public holiday availability.' },
- { question: 'Where is Ashni Optometrists?', answer: '51 Titren Road, Rossburgh, Durban, 4094, South Africa, opposite the licensing centre. Use Get Directions below to open Google Maps.' },
+ { question: 'Where is Ashni Penchaliah Optometrists?', answer: '51 Titren Road, Rossburgh, Durban, 4094, South Africa, opposite the licensing centre. Use Get Directions below to open Google Maps.' },
  { question: 'Who will I see at the practice?', answer: 'Ashni Penchaliah holds a B Optom (Cum Laude) from UKZN and has been practising optometry for 21 years.' },
  { question: 'How do I book an eye examination?', answer: 'Send a WhatsApp enquiry to 073 532 6811. The practice confirms the appointment date, time and cost. The R90 offer is for a driving licence eye test; ask separately about a full eye examination.' },
  { question: 'Can I order prescription spectacles online?', answer: 'Browse the eyewear collection and enquire about a frame. The practice confirms availability, pricing, prescription verification, fitting and in-practice fulfilment before your order is finalised.' },
