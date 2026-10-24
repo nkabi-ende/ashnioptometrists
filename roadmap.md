@@ -7,3 +7,7 @@
 - [x] Add verified hours, WhatsApp and prominent R90 driving licence eye test offer.
 - [x] Connect Shopify and replace demonstration catalogue with live store reads.
 - [x] Verify updated contact flow and layouts.
+- [ ] Compact laptop/mobile navigation and licence offer; keep the introduction visible.
+- [ ] Add verified qualifications, experience and visitor answers; remove portrait placeholders.
+- [ ] Improve per-page SEO, local structured data and sitemap discovery.
+- [ ] Verify page metadata, enquiry flow and laptop/mobile layouts.
