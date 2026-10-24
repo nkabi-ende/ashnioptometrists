@@ -1,0 +1,30 @@
+name: Diagnose live Ashni logo delivery
+on:
+  push:
+    branches: [fix/verify-logo-delivery-20261024]
+  workflow_dispatch:
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: bun install --frozen-lockfile
+      - name: Confirm files exist in Git and compiled assets
+        run: |
+          echo "-- SOURCE ASSETS --"
+          ls -lh public/*logo* public/favicon* public/og-ashni* || true
+          bun run build
+          echo "-- OUTPUT ASSETS --"
+          find dist -type f \\( -iname '*logo*' -o -iname '*favicon*' -o -iname '*og-ashni*' \\) -print || true
+          echo "-- OUTPUT DIRECTORIES --"
+          ls -la dist || true
+      - name: Probe live domain and assets
+        run: |
+          for path in / /ashni-logo-approved.svg /ashni-logo-mark.svg /favicon.svg /favicon.png /og-ashni.png /robots.txt /sitemap.xml; do
+            echo "--- https://ashnioptometrists.com${path} ---"
+            curl -L --silent --show-error --connect-timeout 8 --max-time 20 --output /tmp/ashni-response -w 'HTTP:%{http_code} TYPE:%{content_type} BYTES:%{size_download} REMOTE_IP:%{remote_ip} REDIRECT:%{url_effective}\n' "https://ashnioptometrists.com${path}" || true
+            if [ "${path}" = "/" ]; then head -c 500 /tmp/ashni-response || true; echo; fi
+          done
