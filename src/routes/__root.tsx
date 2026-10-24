@@ -80,6 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#351247" },
       { title: "Ashni Penchaliah Optometrists | Rossburgh, Durban" },
       { name: "description", content: "Eye examinations, prescription spectacles, lens options and R90 driving licence eye tests at 51 Titren Road, Rossburgh, Durban." },
       { property: "og:title", content: "Ashni Penchaliah Optometrists" },
@@ -107,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-ZA">
       <head>
         <HeadContent />
       </head>
