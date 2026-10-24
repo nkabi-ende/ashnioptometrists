@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header, Footer } from '@/components/ashni/shell';
 import { EnquiryProvider } from '@/components/ashni/enquiry';
+import { socialTitle, socialDescription, socialImageUrl } from '@/lib/seo';
 
 function NotFoundComponent() {
   return (
@@ -83,16 +84,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#351247" },
       { title: "Ashni Penchaliah Optometrists | Rossburgh, Durban" },
       { name: "description", content: "Eye examinations, prescription spectacles, lens options and R90 driving licence eye tests at 51 Titren Road, Rossburgh, Durban." },
-      { property: "og:title", content: "Ashni Penchaliah Optometrists" },
-      { property: "og:description", content: "Your local eye care and eyewear destination in Rossburgh, Durban." },
+      { property: "og:title", content: socialTitle },
+      { property: "og:description", content: socialDescription },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://ashnioptometrists.com/" },
-      { property: "og:image", content: "https://ashnioptometrists.com/og-ashni.png" },
+      { property: "og:image", content: socialImageUrl },
+      { property: "og:image:secure_url", content: socialImageUrl },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:site_name", content: "Ashni Penchaliah Optometrists" },
+      { property: "og:locale", content: "en_ZA" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Ashni Penchaliah Optometrists approved brand and eyewear in Rossburgh, Durban" },
+      { property: "og:image:alt", content: "Visit Dr. Ashni Penchaliah, Optometrist, at Ashni Penchaliah Optometrists in Rossburgh, Durban" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://ashnioptometrists.com/og-ashni.png" },
+      { name: "twitter:image", content: socialImageUrl },
+      { name: "twitter:title", content: socialTitle },
+      { name: "twitter:description", content: socialDescription },
+      { name: "twitter:image:alt", content: "Visit Dr. Ashni Penchaliah, Optometrist in Rossburgh, Durban" },
     ],
     links: [
       {

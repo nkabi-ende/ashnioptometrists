@@ -2,19 +2,25 @@ import { practice } from './practice';
 
 export const siteUrl = 'https://ashnioptometrists.com';
 export const siteName = 'Ashni Penchaliah Optometrists';
-export const socialImageUrl = 'https://ashnioptometrists.com/og-ashni.png';
+export const socialImageUrl = 'https://ashnioptometrists.com/og-ashni-dr-v2.png';
+export const socialTitle = 'Visit Dr. Ashni Penchaliah | Optometrist in Rossburgh, Durban';
+export const socialDescription = 'Visit Dr. Ashni Penchaliah, Optometrist in Rossburgh, Durban, for eye examinations, prescription spectacles and R90 driving licence eye tests.';
 export const logoUrl = 'https://ashnioptometrists.com/ashni-logo-approved.svg';
 export const absoluteUrl = (path = '/') => new URL(path, siteUrl).toString();
 
 export function pageHead(title: string, description: string, path = '/') {
  const url = absoluteUrl(path);
+ // Preserve each page's search title while giving shared links an unambiguous
+ // practitioner identity. Keep social descriptions short enough for previews.
+ const pageSocialTitle = path === '/' ? socialTitle : `${title.split(' | ')[0]} | Visit Dr. Ashni`;
+ const pageSocialDescription = path === '/' ? socialDescription : `Visit Dr. Ashni Penchaliah, Optometrist in Rossburgh, Durban. ${description}`.slice(0, 190);
  return {
   meta: [
    { title },
    { name: 'description', content: description },
    { name: 'robots', content: 'index, follow, max-image-preview:large' },
-   { property: 'og:title', content: title },
-   { property: 'og:description', content: description },
+   { property: 'og:title', content: pageSocialTitle },
+   { property: 'og:description', content: pageSocialDescription },
    { property: 'og:type', content: 'website' },
    { property: 'og:locale', content: 'en_ZA' },
    { property: 'og:url', content: url },
@@ -24,12 +30,12 @@ export function pageHead(title: string, description: string, path = '/') {
    { property: 'og:image:type', content: 'image/png' },
    { property: 'og:image:width', content: '1200' },
    { property: 'og:image:height', content: '630' },
-   { property: 'og:image:alt', content: 'Ashni Penchaliah Optometrists in Rossburgh, Durban — approved APO logo and eyewear illustration' },
+   { property: 'og:image:alt', content: 'Visit Dr. Ashni Penchaliah, Optometrist — Ashni Penchaliah Optometrists, Rossburgh, Durban, with elegant symmetrical spectacles' },
    { name: 'twitter:card', content: 'summary_large_image' },
    { name: 'twitter:image', content: socialImageUrl },
-   { name: 'twitter:image:alt', content: 'Ashni Penchaliah Optometrists — Rossburgh, Durban' },
-   { name: 'twitter:title', content: title },
-   { name: 'twitter:description', content: description },
+   { name: 'twitter:image:alt', content: 'Visit Dr. Ashni Penchaliah, Optometrist in Rossburgh, Durban' },
+   { name: 'twitter:title', content: pageSocialTitle },
+   { name: 'twitter:description', content: pageSocialDescription },
   ],
   links: [{ rel: 'canonical', href: url }],
  };
@@ -39,6 +45,7 @@ export const optometristSchema = {
  '@type': 'Person',
  '@id': absoluteUrl('/about#ashni-penchaliah'),
  name: practice.optometrist.name,
+ honorificPrefix: 'Dr.',
  jobTitle: 'Optometrist',
  url: absoluteUrl('/about'),
  worksFor: { '@id': absoluteUrl('/#practice') },
@@ -48,7 +55,7 @@ export const optometristSchema = {
   name: practice.optometrist.qualification,
   credentialCategory: 'Bachelor of Optometry',
  },
- description: `${practice.optometrist.name}, ${practice.optometrist.qualification}, UKZN, with ${practice.optometrist.yearsPractising} years of practice experience.`,
+ description: `Dr. ${practice.optometrist.name}, ${practice.optometrist.qualification}, UKZN, with ${practice.optometrist.yearsPractising} years of practice experience.`,
 };
 export const practiceSchema = {
  '@context': 'https://schema.org',
