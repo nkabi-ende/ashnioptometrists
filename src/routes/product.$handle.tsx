@@ -11,7 +11,25 @@ export const Route = createFileRoute('/product/$handle')({
     const originalImage = product?.featuredImage?.url;
     const image = originalImage ? `${originalImage}${originalImage.includes('?') ? '&' : '?'}width=1200&height=630&crop=center` : undefined;
     const head = pageHead(`${product?.title || 'Eyewear'} | Ashni Penchaliah Optometrists`, product?.description || 'Enquire about eyewear and in-practice fitting at Ashni Penchaliah Optometrists in Durban.', `/product/${encodeURIComponent(params.handle)}`);
-    return { ...head, meta: [...head.meta, ...(!product ? [{ name: 'robots', content: 'noindex, follow' }] : []), ...(image?.startsWith('https://') ? [{ property: 'og:image', content: image }, { name: 'twitter:image', content: image }] : [])] };
+    const productImage = image?.startsWith('https://') ? image : null;
+    const meta = head.meta.filter(entry => {
+      if (!product && 'name' in entry && entry.name === 'robots') return false;
+      if (!productImage) return true;
+      return !(
+        ('property' in entry && ['og:image', 'og:image:secure_url', 'og:image:alt'].includes(entry.property ?? '')) ||
+        ('name' in entry && ['twitter:image', 'twitter:image:alt'].includes(entry.name ?? ''))
+      );
+    });
+    return { ...head, meta: [
+      ...meta,
+      ...(!product ? [{ name: 'robots', content: 'noindex, follow' }] : []),
+      ...(productImage ? [
+        { property: 'og:image', content: productImage },
+        { property: 'og:image:secure_url', content: productImage },
+        { property: 'og:image:alt', content: product?.title || 'Eyewear at Ashni Penchaliah Optometrists' },
+        { name: 'twitter:image', content: productImage },
+      ] : []),
+    ] };
   },
   component: Product,
 });
