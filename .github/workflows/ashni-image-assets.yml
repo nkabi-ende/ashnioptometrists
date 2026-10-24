@@ -1,0 +1,40 @@
+name: Build Ashni social and browser images
+
+on:
+  push:
+    branches:
+      - brand/approved-logo-og-20261024
+    paths:
+      - public/og-ashni.svg
+      - public/favicon.svg
+      - .github/workflows/ashni-image-assets.yml
+
+permissions:
+  contents: write
+
+jobs:
+  rasterize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branded website
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install SVG rasterizer
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - name: Generate social card and tab icons
+        run: |
+          rsvg-convert -w 1200 -h 630 public/og-ashni.svg -o public/og-ashni.png
+          rsvg-convert -w 64 -h 64 public/favicon.svg -o public/favicon.png
+          rsvg-convert -w 180 -h 180 public/favicon.svg -o public/apple-touch-icon.png
+          rsvg-convert -w 512 -h 512 public/favicon.svg -o public/favicon-512.png
+          file public/og-ashni.png public/favicon.png public/apple-touch-icon.png
+      - name: Commit optimized derived assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/og-ashni.png public/favicon.png public/apple-touch-icon.png public/favicon-512.png
+          if ! git diff --cached --quiet; then
+            git commit -m "brand: add rasterized social card and approved browser icons"
+            git push origin HEAD:brand/approved-logo-og-20261024
+          fi
