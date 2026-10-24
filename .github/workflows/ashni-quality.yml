@@ -29,6 +29,7 @@ jobs:
           test -f .output/public/ashni-logo-mark.svg
           test -f .output/public/favicon.svg
           test -f .output/public/og-ashni.png
+          test -f .output/public/og-ashni-dr-v2.png
           grep -q '"name": "ashnioptometrists"' .output/server/wrangler.json
           npx --yes wrangler@4.152.0 deploy --dry-run --outdir /tmp/ashni-worker-dry-run
       - name: Run regression tests
