@@ -9,7 +9,7 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
  const [message, setMessage] = useState<string | null>(null);
  const [copied, setCopied] = useState(false);
  function enquire(type: EnquiryType, product?: string) {
-  const text = product ? `${enquiryMessages[type]} I'm interested in ${product} from your sample collection. Please let me know about available frame options and an in-practice fitting.` : enquiryMessages[type];
+  const text = product ? `${enquiryMessages[type]} I'm interested in ${product}. Please let me know about this product and frame options and an in-practice fitting.` : enquiryMessages[type];
   const url = whatsappUrl(text);
   if (url) { window.open(url,'_blank','noopener,noreferrer'); return; }
   setCopied(false); setMessage(text);

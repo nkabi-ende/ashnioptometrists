@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EyeCareRouteImport } from './routes/eye-care'
 import { Route as LensesRouteImport } from './routes/lenses'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductHandleRoute = ProductHandleRouteImport.update({
+  id: '/product/$handle',
+  path: '/product/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/eye-care': typeof EyeCareRoute
   '/lenses': typeof LensesRoute
   '/shop': typeof ShopRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/eye-care': typeof EyeCareRoute
   '/lenses': typeof LensesRoute
   '/shop': typeof ShopRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,14 +79,36 @@ export interface FileRoutesById {
   '/eye-care': typeof EyeCareRoute
   '/lenses': typeof LensesRoute
   '/shop': typeof ShopRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/eye-care' | '/lenses' | '/shop'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/eye-care'
+    | '/lenses'
+    | '/shop'
+    | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/eye-care' | '/lenses' | '/shop'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/eye-care'
+    | '/lenses'
+    | '/shop'
+    | '/product/$handle'
   id:
-    '__root__' | '/' | '/about' | '/contact' | '/eye-care' | '/lenses' | '/shop'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/eye-care'
+    | '/lenses'
+    | '/shop'
+    | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,6 +118,7 @@ export interface RootRouteChildren {
   EyeCareRoute: typeof EyeCareRoute
   LensesRoute: typeof LensesRoute
   ShopRoute: typeof ShopRoute
+  ProductHandleRoute: typeof ProductHandleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -134,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$handle': {
+      id: '/product/$handle'
+      path: '/product/$handle'
+      fullPath: '/product/$handle'
+      preLoaderRoute: typeof ProductHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -144,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   EyeCareRoute: EyeCareRoute,
   LensesRoute: LensesRoute,
   ShopRoute: ShopRoute,
+  ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
