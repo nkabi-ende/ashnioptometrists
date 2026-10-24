@@ -2,6 +2,8 @@ import { practice } from './practice';
 
 export const siteUrl = 'https://ashnioptometrists.com';
 export const siteName = 'Ashni Penchaliah Optometrists';
+export const socialImageUrl = 'https://ashnioptometrists.com/og-ashni.png';
+export const logoUrl = 'https://ashnioptometrists.com/ashni-logo-approved.svg';
 export const absoluteUrl = (path = '/') => new URL(path, siteUrl).toString();
 
 export function pageHead(title: string, description: string, path = '/') {
@@ -17,7 +19,15 @@ export function pageHead(title: string, description: string, path = '/') {
    { property: 'og:locale', content: 'en_ZA' },
    { property: 'og:url', content: url },
    { property: 'og:site_name', content: siteName },
-   { name: 'twitter:card', content: 'summary' },
+   { property: 'og:image', content: socialImageUrl },
+   { property: 'og:image:secure_url', content: socialImageUrl },
+   { property: 'og:image:type', content: 'image/png' },
+   { property: 'og:image:width', content: '1200' },
+   { property: 'og:image:height', content: '630' },
+   { property: 'og:image:alt', content: 'Ashni Penchaliah Optometrists in Rossburgh, Durban — approved APO logo and eyewear illustration' },
+   { name: 'twitter:card', content: 'summary_large_image' },
+   { name: 'twitter:image', content: socialImageUrl },
+   { name: 'twitter:image:alt', content: 'Ashni Penchaliah Optometrists — Rossburgh, Durban' },
    { name: 'twitter:title', content: title },
    { name: 'twitter:description', content: description },
   ],
@@ -45,6 +55,8 @@ export const practiceSchema = {
  '@type': ['LocalBusiness', 'Optician'],
  '@id': absoluteUrl('/#practice'),
  name: siteName,
+ logo: logoUrl,
+ image: socialImageUrl,
  alternateName: 'Ashni Optometrists',
  url: siteUrl,
  description: 'Optometry practice at 51 Titren Road, Rossburgh, Durban. Eye examinations, prescription spectacles, lens options and R90 driving licence eye tests.',
