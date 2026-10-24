@@ -80,9 +80,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ashni Optometrists | Eye Care & Eyewear in Durban" },
-      { name: "description", content: "Thoughtful eye care and beautifully considered eyewear in Rossburgh, Durban." },
-      { property: "og:title", content: "Ashni Optometrists" },
+      { title: "Ashni Penchaliah Optometrists | Rossburgh, Durban" },
+      { name: "description", content: "Eye examinations, prescription spectacles, lens options and R90 driving licence eye tests at 51 Titren Road, Rossburgh, Durban." },
+      { property: "og:title", content: "Ashni Penchaliah Optometrists" },
       { property: "og:description", content: "Your local eye care and eyewear destination in Rossburgh, Durban." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
