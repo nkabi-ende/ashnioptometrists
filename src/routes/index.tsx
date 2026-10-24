@@ -7,9 +7,11 @@ import { Services, Location, BookingBand, LicenceOffer, pageHead } from '@/compo
 import { Collection } from '@/components/ashni/catalogue';
 import { LensSpotlight } from '@/components/ashni/lens-spotlight';
 import { practice } from '@/lib/practice';
+import { catalogueOptions } from '@/lib/shopify';
 import hero from '@/assets/eyewear-editorial.webp';
 export const Route = createFileRoute("/")({
   component: Index,
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogueOptions),
   head: () => ({ ...pageHead('Ashni Optometrists | Eye Care & Eyewear in Rossburgh, Durban', 'Discover eye examinations, prescription spectacles, sunglasses, tinted and anti-glare lens options at Ashni Optometrists, Rossburgh, Durban.'), scripts: [{type:'application/ld+json',children:JSON.stringify({'@context':'https://schema.org','@type':'Optician',name:practice.name,openingHours:['Mo-Fr 05:00-15:00','Sa 06:00-11:00'],address:{'@type':'PostalAddress',streetAddress:'51 Titren Road',addressLocality:'Rossburgh, Durban',postalCode:'4094',addressCountry:'ZA'}})}] }),
 });
 function Index() {
