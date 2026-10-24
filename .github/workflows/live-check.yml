@@ -1,0 +1,19 @@
+name: One-time Ashni live domain check
+on:
+  push:
+    branches: [diagnostics/after-cloudflare-fix-20261024]
+jobs:
+  live-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed site and public images
+        shell: bash
+        run: |
+          for path in / /ashni-logo-approved.svg /ashni-logo-mark.svg /favicon.svg /og-ashni.png /sitemap.xml; do
+            echo "CHECK:${path}"
+            curl --connect-timeout 8 --max-time 15 --silent --show-error --location --output /tmp/ashni-live --write-out 'HTTP:%{http_code} MIME:%{content_type} SIZE:%{size_download}\n' "https://ashnioptometrists.com${path}" || true
+            if [ "${path}" = "/" ]; then
+              head -c 250 /tmp/ashni-live
+              echo
+            fi
+          done
