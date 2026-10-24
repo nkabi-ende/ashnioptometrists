@@ -1,5 +1,6 @@
 export const practice = {
   name: 'Ashni Optometrists',
+  optometrist: { name: 'Ashni Penchaliah', qualification: 'B Optom (Cum Laude)', university: 'University of KwaZulu-Natal', universityShort: 'UKZN', yearsPractising: 21 },
   address: '51 Titren Road, Rossburgh, Durban, 4094, South Africa',
   whatsappNumber: '27735326811',
   whatsappDisplay: '073 532 6811',
