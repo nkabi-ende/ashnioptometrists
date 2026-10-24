@@ -64,7 +64,7 @@ export const practiceSchema = {
   { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: practice.hours.weekdays.opens, closes: practice.hours.weekdays.closes },
   { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: practice.hours.saturday.opens, closes: practice.hours.saturday.closes },
  ],
- founder: optometristSchema,
+ employee: optometristSchema,
  hasOfferCatalog: {
   '@type': 'OfferCatalog', name: 'Eye care and eyewear services',
   itemListElement: [
