@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+<title id="title">Ashni Penchaliah Optometrists</title><desc id="desc">Purple APO monogram with an eye-inspired lens and the Ashni Penchaliah wordmark</desc>
+<defs><linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F6EDFC"/><stop offset="1" stop-color="#B49BCB"/></linearGradient><linearGradient id="arc" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#6B3980"/><stop offset=".6" stop-color="#C5A0DE"/><stop offset="1" stop-color="#5A276E"/></linearGradient></defs>
+<g fill="#351343" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+<text x="325" y="185" font-size="187" letter-spacing="-22">AP</text>
+<text x="495" y="185" font-size="176">O</text>
+</g>
+<ellipse cx="499" cy="117" rx="46" ry="57" fill="url(#lens)" opacity=".82"/><circle cx="515" cy="94" r="8" fill="#fff"/>
+<path d="M140 184 C220 120 290 92 367 132 S474 184 534 153" fill="none" stroke="url(#arc)" stroke-width="10" stroke-linecap="round"/>
+<g fill="#351343" text-anchor="middle"><text x="360" y="249" font-family="Georgia,serif" font-size="37" letter-spacing="8">ASHNI PENCHALIAH</text><text x="360" y="288" font-family="Arial,sans-serif" font-size="23" letter-spacing="13" fill="#8254A6">OPTOMETRISTS</text></g><path d="M170 316h148m84 0h148" stroke="#B49BCB" stroke-width="2"/><text x="360" y="323" fill="#351343" font-family="Georgia,serif" text-anchor="middle" font-size="22" letter-spacing="5">A.P.O</text>
+</svg>
