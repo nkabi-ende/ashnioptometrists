@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { siteUrl, socialImageUrl, logoUrl, absoluteUrl, pageHead, practiceSchema, siteSchema, breadcrumbSchema } from '@/lib/seo';
+import { siteUrl, socialImageUrl, socialTitle, socialDescription, logoUrl, absoluteUrl, pageHead, practiceSchema, optometristSchema, siteSchema, breadcrumbSchema } from '@/lib/seo';
 import { practice } from '@/lib/practice';
 
 describe('Production SEO and local business metadata', () => {
@@ -15,13 +15,18 @@ describe('Production SEO and local business metadata', () => {
  });
  it('exposes one branded high-resolution social sharing image for the official domain', () => {
   const head = pageHead('Rossburgh optometrist', 'Eyecare in Durban.', '/eye-care');
-  expect(socialImageUrl).toBe('https://ashnioptometrists.com/og-ashni.png');
+  expect(socialImageUrl).toBe('https://ashnioptometrists.com/og-ashni-dr-v2.png');
+  expect(socialTitle).toContain('Visit Dr. Ashni');
+  expect(socialDescription).toContain('Dr. Ashni Penchaliah, Optometrist');
   expect(head.meta).toContainEqual({property: 'og:image', content: socialImageUrl});
   expect(head.meta).toContainEqual({property: 'og:image:width', content: '1200'});
   expect(head.meta).toContainEqual({property: 'og:image:height', content: '630'});
   expect(head.meta).toContainEqual({name: 'twitter:image', content: socialImageUrl});
   expect(head.meta).toContainEqual({name: 'twitter:card', content: 'summary_large_image'});
   expect(practiceSchema.logo).toBe(logoUrl);
+  expect(optometristSchema.honorificPrefix).toBe('Dr.');
+  expect(pageHead('Home', 'Description', '/').meta).toContainEqual({ property: 'og:description', content: socialDescription });
+  expect(pageHead('Eye Care', 'Learn about our services', '/eye-care').meta.find(m => 'property' in m && m.property === 'og:description')?.content).toContain('Dr. Ashni Penchaliah');
  });
  it('uses the official full practice name and consistent address', () => {
   expect(practice.name).toBe('Ashni Penchaliah Optometrists');
