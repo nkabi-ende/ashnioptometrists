@@ -1,0 +1,41 @@
+name: Verify Cloudflare after GitHub reauthorization
+on:
+  push:
+    branches: [diagnostics/verify-reauthorized-cloudflare-20261024]
+jobs:
+  production-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify production release and required assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://ashnioptometrists.com"
+          TARGET="ashni-approved-logo-social-seo-2026-10-24-v3-reauthorized"
+          ready=0
+          echo "Verifying Cloudflare deploys GitHub main commit fbf3708849aa74e124fb97aaf72ea9bb32d5f26a"
+          for attempt in $(seq 1 20); do
+            status=$(curl -sSL --connect-timeout 10 --max-time 15 -o /tmp/ashni-marker -w '%{http_code}' "$BASE/deployment-health.json?attempt=$attempt" || true)
+            if [ "$status" = 200 ] && grep -q "$TARGET" /tmp/ashni-marker; then
+              echo "PASS: release marker is live, attempt $attempt"
+              ready=1
+              break
+            fi
+            echo "NOT DEPLOYED YET: attempt $attempt/20, marker HTTP=$status"
+            sleep 10
+          done
+          test "$ready" = 1 || { echo 'FAIL: Cloudflare is not serving fresh main release'; exit 1; }
+          for path in /ashni-logo-approved.svg /ashni-logo-mark.svg /favicon.svg /favicon.png /og-ashni.png /sitemap.xml; do
+            status=$(curl -sSL --connect-timeout 10 --max-time 15 -o /tmp/ashni-asset -w '%{http_code} %{content_type} %{size_download}' "$BASE$path")
+            echo "ASSET: $path -> $status"
+            [[ "$status" == 200\ * ]] || exit 1
+            test -s /tmp/ashni-asset
+            if [[ "$path" == *.svg ]]; then grep -q '<svg' /tmp/ashni-asset; fi
+            if [[ "$path" == *.png ]]; then file --mime-type /tmp/ashni-asset | grep -q 'image/png'; fi
+          done
+          curl -fsSL "$BASE/" -o /tmp/ashni-home
+          grep -q 'ashni-logo-mark.svg' /tmp/ashni-home
+          grep -q 'ashni-logo-approved.svg' /tmp/ashni-home
+          grep -q 'og-ashni.png' /tmp/ashni-home
+          echo "PASS: production site HTML, logos, favicon, OG image, sitemap"
