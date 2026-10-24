@@ -1,6 +1,6 @@
 {
   "site": "Ashni Penchaliah Optometrists",
-  "release": "ashni-approved-logo-social-seo-2026-10-24-v2",
+  "release": "ashni-approved-logo-social-seo-2026-10-24-v3-reauthorized",
   "branch": "main",
   "worker": "ashnioptometrists",
   "expected_assets": [
@@ -10,5 +10,6 @@
     "/favicon.png",
     "/og-ashni.png",
     "/sitemap.xml"
-  ]
+  ],
+  "deployment_trigger": "github-authorization-restored-20261024"
 }
