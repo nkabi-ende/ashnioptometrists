@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Logo } from './brand';
 import { WhatsAppCTA } from './enquiry';
 import { practice } from '@/lib/practice';
-const navigation = [{to:'/',label:'Home'},{to:'/eye-care',label:'Eye Care'},{to:'/drivers-licence-eye-test',label:'R90 Licence Test'},{to:'/shop',label:'Eyewear'},{to:'/lenses',label:'Lens Options'},{to:'/about',label:'About'},{to:'/contact',label:'Contact'}] as const;
+const navigation = [{to:'/',label:'Home'},{to:'/eye-care',label:'Eye Care'},{to:'/drivers-licence-eye-test',label:'R90 Licence Test'},{to:'/shop',label:'Shop Frames'},{to:'/lenses',label:'Lens Options'},{to:'/about',label:'About'},{to:'/contact',label:'Contact'}] as const;
 export function Header() {
  const [open,setOpen] = useState(false);
  const pathname = useRouterState({select:s=>s.location.pathname});
