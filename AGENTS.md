@@ -12,4 +12,5 @@
 ## Website architecture
 - Use shared presentation components and the TanStack root shell for navigation, footer and enquiry context, so every page stays consistent.
 - Keep official contact configuration and enquiry URL generation in one browser-safe module, so missing contact information never creates unintended external links.
-- Keep the preview catalogue in a typed standalone dataset with explicit demo and checkout-eligibility fields, so approved commerce integrations can replace it without changing cards.
+- Read displayed products from Shopify Storefront API through shared query options and route loaders; never fall back to demonstration stock, so the displayed catalogue reflects the connected store.
+- Keep prescription products enquiry-only until explicit eligibility approval and real product details are supplied, so connecting a store does not imply prescription checkout approval.
