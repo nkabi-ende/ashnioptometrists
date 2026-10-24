@@ -25,6 +25,10 @@ jobs:
           cat .output/server/wrangler.json
           echo "-- NITRO DEPLOY CONFIG --"
           cat .wrangler/deploy/config.json || true
+          echo "-- CHECK EXPECTED TARGET --"
+          grep -q '"name": "ashnioptometrists"' .output/server/wrangler.json
+          echo "-- WRANGLER DRY RUN --"
+          npx --yes wrangler@4.152.0 deploy --dry-run --outdir /tmp/ashni-worker-dry-run
           echo "-- GIT HEAD --"
           git rev-parse HEAD
       - name: Probe live domain and assets
