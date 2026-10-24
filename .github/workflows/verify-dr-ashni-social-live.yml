@@ -1,0 +1,37 @@
+name: Verify Visit Dr. Ashni Open Graph production
+on:
+  push:
+    branches: [diagnostics/verify-dr-ashni-og-live-20261024]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check live social preview and practitioner metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://ashnioptometrists.com"
+          echo "Checking new versioned social image, Dr. Ashni copy and approved logo..."
+          ok=0
+          for attempt in $(seq 1 16); do
+            code=$(curl -LsS --connect-timeout 8 --max-time 16 --output /tmp/ashni-card --write-out '%{http_code} %{content_type} %{size_download}' "$BASE/og-ashni-dr-v2.png?v=20261024-$attempt" || true)
+            homepage=$(curl -LsS --connect-timeout 8 --max-time 16 "$BASE/?social-test=$attempt" || true)
+            echo "Attempt $attempt: social image $code"
+            if [[ "$code" == 200\ image/png\ * ]] && printf '%s' "$homepage" | grep -q "Visit Dr. Ashni" && printf '%s' "$homepage" | grep -q "og-ashni-dr-v2.png"; then
+              file --mime-type /tmp/ashni-card | grep -q "image/png"
+              ok=1
+              echo "PASS: new PNG and Dr. Ashni Open Graph metadata on live site"
+              break
+            fi
+            sleep 8
+          done
+          if [[ "$ok" -ne 1 ]]; then
+            echo "FAIL: new release not yet live. Check Cloudflare production Deployments."
+            exit 1
+          fi
+          for p in /ashni-logo-approved.svg /favicon.svg /sitemap.xml; do
+            status=$(curl -LsS --connect-timeout 8 --max-time 12 --output /tmp/asset --write-out '%{http_code} %{content_type}' "$BASE$p")
+            echo "$p => $status"
+            [[ "$status" == 200\ * ]]
+          done
