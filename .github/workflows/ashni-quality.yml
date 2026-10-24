@@ -23,5 +23,13 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Build TanStack Start website
         run: bun run build
+      - name: Verify Cloudflare branding assets and Worker target
+        run: |
+          test -f .output/public/ashni-logo-approved.svg
+          test -f .output/public/ashni-logo-mark.svg
+          test -f .output/public/favicon.svg
+          test -f .output/public/og-ashni.png
+          grep -q '"name": "ashnioptometrists"' .output/server/wrangler.json
+          npx --yes wrangler@4.152.0 deploy --dry-run --outdir /tmp/ashni-worker-dry-run
       - name: Run regression tests
         run: bun run test
